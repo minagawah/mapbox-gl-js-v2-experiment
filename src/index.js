@@ -67,17 +67,8 @@ const set_buildings = ({ key }) => {
   return { key };
 };
 
-/**
- * @param {Object} [o]
- * @param {string} [o.key]
- * @returns {Object}
- */
 const set_layers = compose(set_buildings, set_terrain, set_sky);
 
-/**
- * Returns a handler for "load" event.
- * @returns {Function}
- */
 const onload_maker = key => () => set_layers({ key });
 
 const update_camera = ({ position, altitude, target }) => {
@@ -87,9 +78,6 @@ const update_camera = ({ position, altitude, target }) => {
   map.setFreeCameraOptions(camera);
 };
 
-/**
- * @returns {Function}
- */
 const tick_maker = curr => time => {
   if (!map) return;
 
@@ -115,10 +103,6 @@ const tick_maker = curr => time => {
   cnt++;
 };
 
-/**
- * Returns a handler for "idle" event.
- * @returns {Function}
- */
 const onidle_maker = key => {
   const animations = PLACES[key].__map.animations;
 
@@ -155,7 +139,7 @@ const onidle_maker = key => {
  * after this function.
  */
 const reset_map = ({ key }) => {
-  // Make sure to destroy the previous app.
+  // Make sure to destroy the previous map.
   if (map) {
     map.remove();
     map = null;
@@ -166,7 +150,7 @@ const reset_map = ({ key }) => {
     anim_req = null;
   }
 
-  // It takes time to destroy the previous app.
+  // It takes time to destroy the previous map.
   // If we did not wait for a while, we would end up
   // applying the map attributes NOT to the new map,
   // but to the previous map which we want to avoid.
@@ -196,15 +180,8 @@ const reset = compose(
   })
 );
 
-/**
- * Returns a handler for "click" event (for radio inputs).
- * @returns {Function}
- */
 const onclick_maker = data => () => reset(data);
 
-/**
- * Sets listers to all the radio inputs.
- */
 const set_listeners = data => {
   const { key } = data;
   document.querySelectorAll('input[name="choice"]').forEach(item => {
@@ -220,9 +197,6 @@ const set_listeners = data => {
   return data;
 };
 
-/**
- * Notice "set_listeners" is called only at initial startup.
- */
 const init = compose(reset, set_listeners);
 
 init({ key: DEFAULT_PLACE_KEY });
