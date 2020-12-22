@@ -80,10 +80,13 @@ yarn add --dev webpack webpack-cli webpack-dev-server file-loader css-loader sty
 - `webpack-merge`
 - `clean-webpack-plugin`
 - `html-webpack-plugin`
+  - Template is in `src/index.html`, and outputs `dist/index.html`.
 - `copy-webpack-plugin`
+  - Just to copy `src/assets` to `dist/assets`.
 - `mini-css-extract-plugin`
   - While we are extracting CSS files, and write them to disks, this is for production only.
 - `license-webpack-plugin`
+  - Extracts license information for production.
 - `postcss`
   - We definitely need this when using Tailwind.
 - `autoprefixer`
