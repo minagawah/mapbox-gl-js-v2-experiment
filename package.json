@@ -1,6 +1,6 @@
 {
   "name": "mapbox-gl-js-v2-experiment",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "description": "Mapbox GL JS v2 experiment.",
   "main": "dist/app.js",

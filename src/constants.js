@@ -1,9 +1,12 @@
+/* @prettier */
+
 export const DEFAULT_PLACE_KEY = 'enoshima';
 
-export const DEFAULT_MAP = {
+const DEFAULT_MAP = {
   container: 'map',
+  // style: 'mapbox://styles/mapbox/light-v10',
   style: 'mapbox://styles/mapbox/streets-v11',
-  center: [139.6503, 35.6762], // Tokyo
+  center: [139.6503, 35.6762], // [lng, lat] for Tokyo
   zoom: 18,
   pitch: 45,
   bearing: 20,
@@ -20,7 +23,7 @@ export const DEFAULT_SKY = {
   },
 };
 
-export const DEFAULT_TERRAIN = {
+const DEFAULT_TERRAIN = {
   __source_id: 'raster-dem-mapbox',
   __source_options: {
     type: 'raster-dem',
@@ -33,19 +36,7 @@ export const DEFAULT_TERRAIN = {
   },
 };
 
-export const DEM_RGB_TERRAIN = {
-  __source_id: 'raster-dem-RGB',
-  __source_options: {
-    type: 'raster-dem',
-    url: 'mapbox://mapbox.terrain-rgb',
-  },
-  __terrain_options: {
-    source: 'raster-dem-RGB',
-    exaggeration: 1.5,
-  },
-};
-
-export const DEFAULT_BUILDING = {
+const DEFAULT_BUILDING = {
   id: '3d-buildings',
   source: 'composite',
   'source-layer': 'building',
@@ -54,8 +45,9 @@ export const DEFAULT_BUILDING = {
   minzoom: 15,
   paint: {
     'fill-extrusion-color': '#aaa',
-    // use an 'interpolate' expression to add a smooth transition
-    // effect to the buildings as the user zooms in.
+    // Use an 'interpolate' expression to add
+    // a smooth transition effect to
+    // the buildings as the user zooms in.
     'fill-extrusion-height': [
       'interpolate',
       ['linear'],
@@ -80,7 +72,7 @@ export const DEFAULT_BUILDING = {
 
 export const PLACES = {
   enoshima: (() => {
-    const start = [139.30041, 35.49736]; // [lng, lat]
+    const start = [139.30041, 35.49736];
     const end = [139.48906, 35.30532];
     const target = [139.4834, 35.3005];
     const alt_start = 5000;
@@ -135,7 +127,17 @@ export const PLACES = {
         bearing: 190,
       },
     },
-    __terrain: DEM_RGB_TERRAIN,
+    __terrain: {
+      __source_id: 'raster-dem-RGB',
+      __source_options: {
+        type: 'raster-dem',
+        url: 'mapbox://mapbox.terrain-rgb',
+      },
+      __terrain_options: {
+        source: 'raster-dem-RGB',
+        exaggeration: 1.5,
+      },
+    },
   },
   nezu: {
     __map: {
@@ -156,7 +158,6 @@ export const PLACES = {
       title: 'Tokyo Masonic Center',
       options: {
         ...DEFAULT_MAP,
-        // style: 'mapbox://styles/mapbox/light-v10',
         center: [139.74414, 35.65977],
         zoom: 17.9,
         pitch: 75,

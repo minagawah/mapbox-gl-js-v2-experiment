@@ -1,7 +1,10 @@
+/* @prettier */
+/* eslint camelcase: [0] */
+
 import { compose, tap } from 'ramda';
 import mapboxgl from 'mapbox-gl';
 
-import { int, lerp, easeInOutQuad } from '@/math';
+import { int, lerp, ease_in_out_quad } from '@/math';
 import { DEFAULT_PLACE_KEY, DEFAULT_SKY, PLACES } from '@/constants';
 
 import './styles.css';
@@ -14,7 +17,6 @@ let anim_req;
 let anim_index = 0;
 let anim_time = 0;
 let prev = 0;
-let cnt = 0;
 
 const set_title = ({ key }) => {
   const title = PLACES[key].__map.title;
@@ -53,9 +55,9 @@ const set_buildings = ({ key }) => {
 
     let label_id;
     for (let i = 0; i < _layers.length; i++) {
-      const { id: _id, type: _type, layout = {} } = _layers[i] || {};
-      if (_type === 'symbol' && layout['text-field']) {
-        label_id = _id;
+      const { id, type, layout = {} } = _layers[i] || {};
+      if (type === 'symbol' && layout['text-field']) {
+        label_id = id;
         break;
       }
     }
@@ -85,9 +87,8 @@ const tick_maker = curr => time => {
 
   if (anim_time < duration) {
     const phase = anim_time / duration;
-
     update_camera({
-      position: lerp(easeInOutQuad(phase), start, end),
+      position: lerp(ease_in_out_quad(phase), start, end),
       altitude: lerp(phase, altitude[0], altitude[1]),
       target,
     });
@@ -99,8 +100,6 @@ const tick_maker = curr => time => {
   prev = time;
 
   anim_req = window.requestAnimationFrame(tick_maker(curr));
-
-  cnt++;
 };
 
 const onidle_maker = key => {
@@ -123,6 +122,8 @@ const onidle_maker = key => {
       // For "idle" event is called many times, we want
       // to prevent unnecessary animations to be registered.
       if (!anim_req) {
+        // Update the current animation in case
+        // we have a new "anim_index" now.
         curr = animations[anim_index];
         anim_req = window.requestAnimationFrame(tick_maker(curr));
       }
@@ -133,9 +134,9 @@ const onidle_maker = key => {
 /**
  * IMPORTANT:
  * Since this function contains asynchronous tasks,
- * unlike other functions, it does not pass along
+ * unlike other functions, it does not return
  * the given data back to the functional chain.
- * Make sure that no other functions would follow
+ * Make sure that no other functions follow
  * after this function.
  */
 const reset_map = ({ key }) => {
@@ -145,63 +146,59 @@ const reset_map = ({ key }) => {
     map = null;
   }
 
+  // Cancel animations if running.
   if (anim_req) {
     window.cancelAnimationFrame(anim_req);
     anim_req = null;
   }
 
   // It takes time to destroy the previous map.
-  // If we did not wait for a while, we would end up
-  // applying the map attributes NOT to the new map,
-  // but to the previous map which we want to avoid.
+  // If we did not wait, we would end up applying
+  // attributes to the previous map.
   setTimeout(() => {
     map = new mapboxgl.Map(PLACES[key].__map.options);
     map.addControl(new mapboxgl.NavigationControl());
 
+    // Reset all the shared variables.
     anim_index = 0;
     anim_time = 0;
     prev = 0;
-    cnt = 0;
 
     map.on('load', onload_maker(key));
 
+    // Add "idle" event handler only when
+    // we have animations for the map.
     if (PLACES[key].__map.animations) {
       map.on('idle', onidle_maker(key));
     }
   }, 800);
 };
 
-const reset = compose(
-  reset_map,
-  set_title,
-  tap(({ key }) => {
-    console.log('[index] RESET RESET RESET');
-    console.log(`[index] key: ${key}`);
-  })
-);
+const reset = compose(reset_map, set_title);
 
 const onclick_maker = data => () => reset(data);
 
 const set_listeners = data => {
   const { key } = data;
+
   document.querySelectorAll('input[name="choice"]').forEach(item => {
     const id = item.getAttribute('id');
     const attached_key = id.split('-')[1];
-
     if (attached_key === key) {
       item.checked = true;
     }
-
     item.addEventListener('click', onclick_maker({ key: attached_key }));
   });
+
   return data;
 };
 
 const init = compose(reset, set_listeners);
 
+// Let's begin!
 init({ key: DEFAULT_PLACE_KEY });
 
-// For HMR
+// HMR
 if (typeof module.hot !== 'undefined') {
   module.hot.accept();
 }

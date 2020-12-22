@@ -1,3 +1,4 @@
+/* @prettier */
 /* eslint camelcase: [0] */
 /* eslint no-unused-vars: [1] */
 
@@ -9,8 +10,6 @@ export const deg_to_rad = (deg = 0) => (deg * Math.PI) / 180;
 /* alias */ export const radToDeg = rad_to_deg;
 /* alias */ export const degToRad = deg_to_rad;
 
-// export const rand = (min, max) => Math.random() * (max - min) + min;
-
 export const rand = (min, max) => {
   if (max === undefined) {
     max = min;
@@ -18,8 +17,6 @@ export const rand = (min, max) => {
   }
   return min + Math.random() * (max - min);
 };
-
-// const rand_int = range => Math.floor(Math.random() * range);
 
 export const rand_int = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
@@ -56,10 +53,12 @@ export const lerp = (norm, min, max) => {
  * find out the new value if it were mapped
  * to the range between `dmin` and `dmax`.
  * (currently, not used in the main program)
- * Ex. mapNorm(50, 0, 100, 0, 10000) ---> 5000
+ * Ex. map_norm(50, 0, 100, 0, 10000) ---> 5000
  */
-export const mapNorm = (val, smin, smax, dmin, dmax) =>
+export const map_norm = (val, smin, smax, dmin, dmax) =>
   lerp(norm(val, smin, smax), dmin, dmax);
+
+/* alias */ export const mapNorm = map_norm;
 
 /**
  * Limit the value to a certain range.
@@ -88,32 +87,37 @@ export const angle = (p1, p2) => Math.atan2(p1.y - p2.y, p1.x - p2.x);
 
 /**
  * See if the value falls within the given range.
- * export const inRange = (val, min, max) => (
- *   val >= Math.min(min, max) && val <= Math.max(min, max)
- * );
  */
-export const inRange = (val, min, max) => val >= min && val <= max;
+export const in_range = (val, min, max) => val >= min && val <= max;
+
+/* alias */ export const inRange = in_range;
 
 /**
  * See if `x` and `y` falls into the bounds made by `rect`.
  */
-export const pointInRect = (x, y, rect) =>
-  inRange(x, rect.x, rect.x + rect.width) &&
-  inRange(y, rect.y, rect.y + rect.height);
+export const point_in_rect = (x, y, rect) =>
+  in_range(x, rect.x, rect.x + rect.width) &&
+  in_range(y, rect.y, rect.y + rect.height);
+
+/* alias */ export const pointInRect = point_in_rect;
 
 /**
  * See if the given point falls within the arc's radius.
  */
-export const pointInArc = (p, a) => distance(p, a) <= a.radius;
+export const point_in_arc = (p, a) => distance(p, a) <= a.radius;
+
+/* alias */ export const pointInArc = point_in_arc;
 
 /**
  * Merge `props` into `obj`.
  */
-export const setProps = (obj, props) => {
+export const set_props = (obj, props) => {
   for (let k in props) {
     obj[k] = props[k];
   }
 };
+
+/* alias */ export const setProps = set_props;
 
 export const multicurve = (points, ctx) => {
   let p0, p1, midx, midy;
@@ -138,25 +142,34 @@ export const multicurve = (points, ctx) => {
   ctx.quadraticCurveTo(p0.x, p0.y, p1.x, p1.y);
 };
 
-export const easeInOutQuad = t => {
+export const ease_in_out_quad = t => {
   return t < 0.5 ? 2.0 * t * t : (4.0 - 2.0 * t) * t - 1.0;
 };
 
+/* alias */ export const easeInOutQuad = ease_in_out_quad;
+
 export default {
   rand,
+  rand_int,
   randInt,
   norm,
   lerp,
+  map_norm,
   mapNorm,
   clamp,
   distance,
   deg,
   rad,
   angle,
+  in_range,
   inRange,
+  point_in_rect,
   pointInRect,
+  point_in_arc,
   pointInArc,
+  set_props,
   setProps,
   multicurve,
+  ease_in_out_quad,
   easeInOutQuad,
 };
