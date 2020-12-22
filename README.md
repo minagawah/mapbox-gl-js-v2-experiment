@@ -4,7 +4,7 @@ Mapbox GL JS v2 experiment.
 
 [1. About](#1-about)  
 [2. What I Did](#3-what-i-did)  
-&nbsp; &nbsp; [2-1. Installed NPM Packages All](#2-1-installed-npm-packages-all)  
+&nbsp; &nbsp; [2-1. All NPM Packages Installed](#2-1-all-npm-packages-installed)  
 &nbsp; &nbsp; [2-2. Babel](#2-2-babal)  
 &nbsp; &nbsp; [2-3. Webpack](#2-3-webpack)  
 &nbsp; &nbsp; [2-4. Other Build Tools](#2-4-other-build-tools)  
@@ -32,7 +32,7 @@ Some fancy features:
 
 ## 2. What I Did
 
-### 2-1. Installed NPM Packages All
+### 2-1. All NPM Packages Installed
 
 
 ```
