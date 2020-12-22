@@ -46,6 +46,7 @@ yarn add --dev @babel/core @babel/cli @babel/preset-env core-js@3 @babel/runtime
 - `@babel/core`
 - `@babel/cli`
 - `@babel/preset-env`
+  - `useBuiltIns: 'usage'` in `babel.config.js` will automatically insert polyfills.
 - `core-js@3`
   - For `@babel/polyfill` has been deprecated.
 - `@babel/runtime-corejs3`
