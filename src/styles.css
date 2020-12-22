@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a, a:visited {
+    text-decoration: underline;
+    color: #dc1c1c;
+}
+
+a:hover, aactive {
+    color: #8c0000;
+}
