@@ -46,11 +46,11 @@ yarn add --dev @babel/core @babel/cli @babel/preset-env core-js@3 @babel/runtime
 - @babel/core
 - @babel/cli
 - @babel/preset-env
-- core-js@3  
-&nbsp; &nbsp; For `@babel/polyfill` has been deprecated.
+- core-js@3
+  - For `@babel/polyfill` has been deprecated.
 - @babel/runtime-corejs3
-- babel-loader  
-&nbsp; &nbsp; Always handy having definitions in `.babelrc` (or `babel.config.js`).
+- babel-loader
+  - Always handy having definitions in `.babelrc` (or `babel.config.js`).
 
 ```
 yarn add --dev @babel/core @babel/preset-env @babel/cli core-js@3 @babel/runtime-corejs3 babel-loader
@@ -64,12 +64,10 @@ yarn add --dev @babel/core @babel/preset-env @babel/cli core-js@3 @babel/runtime
 - webpack-dev-server
 - file-loader
 - css-loader
-- style-loader  
-&nbsp; &nbsp; This is for development only. For production,  
-&nbsp; &nbsp; we are using `mini-css-extract-plugin`.
-- postcss-loader  
-&nbsp; &nbsp; You definitely need this when using Tailwind.
-
+- style-loader
+  - This is for development only. For production, we are using `mini-css-extract-plugin`.
+- postcss-loader
+  - We definitely need this when using Tailwind.
 
 ```
 yarn add --dev webpack webpack-cli webpack-dev-server file-loader css-loader style-loader postcss-loader
@@ -77,25 +75,21 @@ yarn add --dev webpack webpack-cli webpack-dev-server file-loader css-loader sty
 
 ### 2-4. Other Build Tools
 
-- dotenv  
-&nbsp; &nbsp; API TOKENS for Mapbox are stored in `.env` and `.env.local`.  
-&nbsp; &nbsp; Although they will be included in bundle files anyways,  
-&nbsp; &nbsp; I have IP restrictions for API TOKENS, and no problem.
+- dotenv
+  - API TOKENS for Mapbox are stored in `.env` and `.env.local`. Although they will be included in bundle files anyways, I have IP restrictions for API TOKENS, and no problem.
 - webpack-merge
 - clean-webpack-plugin
 - html-webpack-plugin
 - copy-webpack-plugin
-- mini-css-extract-plugin  
-&nbsp; &nbsp; While we are extracting CSS files, and write them to disks,  
-&nbsp; &nbsp; this is for production only.
+- mini-css-extract-plugin
+  - While we are extracting CSS files, and write them to disks, this is for production only.
 - license-webpack-plugin
-- postcss  
-&nbsp; &nbsp; You definitely need this when using Tailwind.
+- postcss
+  - We definitely need this when using Tailwind.
 - autoprefixer
 - prettier
-- http-server  
-&nbsp; &nbsp; May worth nothing. Yet, I can check behaviors for the built bundles  
-&nbsp; &nbsp; before I deploy to the production.
+- http-server
+  - May worth nothing. Yet, I can check behaviors for the built bundles before I deploy to the production.
 
 ```
 yarn add --dev webpack-merge clean-webpack-plugin html-webpack-plugin license-webpack-plugin postcss autoprefixer prettier http-server
@@ -103,15 +97,12 @@ yarn add --dev webpack-merge clean-webpack-plugin html-webpack-plugin license-we
 
 ### 2-5. Other Dependencies
 
-- ramda  
-&nbsp; &nbsp; Makes our lives easier for functional programming.
+- ramda
+  - Makes our lives easier for functional programming.
 - tailwindcss  
-&nbsp; &nbsp; Since we are not using React this time, we're not using  
-&nbsp; &nbsp; `twin.macro` nor `emotion`, but a plain `tailwind`.  
-&nbsp; &nbsp; See how easy it is to setup.  
-&nbsp; &nbsp; Make sure we have `postcss.config.js`.
-- mapbox-gl  
-&nbsp; &nbsp; This is our main recipe.
+  - Since we are not using React this time, we're not using `twin.macro` nor `emotion`, but a plain `tailwind`. See how easy it is to setup. Make sure we have `postcss.config.js`.
+- mapbox-gl
+  - This is our main recipe.
 
 ```
 yarn add ramda mapbox-gl
