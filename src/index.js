@@ -1,5 +1,17 @@
 /* @prettier */
+
 /* eslint camelcase: [0] */
+
+/**
+ * [One Big Functional Chain]
+ * Notice how each function composes other functions. Each function receives an object,
+ * and returns the same object to another, making the whole app one big functional chain.
+ *
+ * [It Has Side-Effects...]
+ * Also, notice the functions look up shared varibles (e.g. `map`, `anim_req`, etc.),
+ * and they even manipulate these variables. Functional programming can sometimes
+ * become an overhead to app's performance, and we need to compromise to some degree...
+ */
 
 import { compose, tap } from 'ramda';
 import mapboxgl from 'mapbox-gl';
