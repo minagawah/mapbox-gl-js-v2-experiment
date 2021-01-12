@@ -8,6 +8,14 @@ const LicenseWebpackPlugin = require('license-webpack-plugin')
 const base = require('./webpack.base.js');
 const dotenv = require('dotenv').config({ path: __dirname + '/.env' });
 
+const stringify = data =>
+  Object.keys(data).reduce((acc, key) => {
+    if (data[key]) {
+      acc[key] = JSON.stringify(data[key]);
+    }
+    return acc;
+  }, {});
+
 module.exports = merge(base, {
   mode: 'production',
   devtool: 'hidden-source-map',
@@ -27,8 +35,9 @@ module.exports = merge(base, {
     ],
   },
   plugins: [
-    new webpack.EnvironmentPlugin({
-      ...dotenv.parsed,
+    new webpack.DefinePlugin({
+      NODE_ENV: '"production"',
+      ...stringify(dotenv.parsed),
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[chunkhash].css',

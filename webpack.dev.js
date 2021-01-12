@@ -5,6 +5,14 @@ const { merge } = require('webpack-merge');
 const base = require('./webpack.base.js');
 const dotenv = require('dotenv').config({ path: __dirname + '/.env.local' });
 
+const stringify = data =>
+  Object.keys(data).reduce((acc, key) => {
+    if (data[key]) {
+      acc[key] = JSON.stringify(data[key]);
+    }
+    return acc;
+  }, {});
+
 module.exports = merge(base, {
   mode: 'development',
   devtool: 'inline-source-map',
@@ -24,8 +32,9 @@ module.exports = merge(base, {
     ],
   },
   plugins: [
-    new webpack.EnvironmentPlugin({
-      ...dotenv.parsed,
+    new webpack.DefinePlugin({
+      NODE_ENV: '"development"',
+      ...stringify(dotenv.parsed),
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],

@@ -16,7 +16,7 @@ import { DEFAULT_PLACE_KEY, DEFAULT_SKY, PLACES } from '@/constants';
 import './styles.css';
 
 // API token is included in the bundle, but has domain name restriction.
-mapboxgl.accessToken = process.env.MAPBOX_API_TOKEN;
+mapboxgl.accessToken = MAPBOX_API_TOKEN;
 
 let map;
 let anim_req;
