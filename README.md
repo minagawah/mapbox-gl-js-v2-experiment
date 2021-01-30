@@ -17,7 +17,6 @@ Mapbox GL JS v2 experiment.
 [View Demo](http://tokyo800.jp/mina/mapbox-gl-js-v2-experiment/)  
 
 
-<a id="about"></a>
 ## 1. About
 
 Playing with Mapbox GL JS v2.  
