@@ -14,7 +14,7 @@
   "keywords": [
     "mapbox"
   ],
-  "author": "Hiroki Minagawa <minagawa@tokyo800.jp>",
+  "author": "minagawah <minag@tokyo800.jp>",
   "license": "(Unlicense OR MIT)",
   "bugs": {
     "url": "https://github.com/minagawah/mapbox-gl-js-v2-experiment/issues"
